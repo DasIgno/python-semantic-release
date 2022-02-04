@@ -268,15 +268,19 @@ def push_new_version(
     :param owner: Organisation or user that owns the repository.
     :param name: Name of repository.
     :param branch: Branch to push to
-    :param server_url: Name of the server. Will be used to identify a gitlab instance.
+    :param domain: Name of the server. Will be used to identify a gitlab instance.
     :raises GitError: if GitCommandError is raised
     """
     server = "origin"
     if auth_token:
         token = auth_token
+        actor = ""
         if config.get("hvcs") == "gitlab":
             token = "gitlab-ci-token:" + token
-        actor = os.environ.get("GITHUB_ACTOR")
+        elif config.get("hvcs") == "gitea":
+            actor = owner
+        else:
+            actor = os.environ.get("GITHUB_ACTOR")
         if actor:
             server = f"https://{actor}:{token}@{domain}/{owner}/{name}.git"
         else:

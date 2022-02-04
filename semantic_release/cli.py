@@ -46,6 +46,7 @@ from .vcs_helpers import (
 logger = logging.getLogger("semantic_release")
 
 TOKEN_VARS = [
+    "gitea_token_var",
     "github_token_var",
     "gitlab_token_var",
     "pypi_pass_var",
@@ -320,7 +321,7 @@ def publish(retry: bool = False, noop: bool = False, **kwargs):
         else:
             logger.warning("Missing token: cannot post changelog to HVCS")
 
-        # Upload to GitHub Releases
+        # Upload to GitHub or Gitea Releases
         if upload_release:
             if check_token():
                 logger.info("Uploading to HVCS release")
