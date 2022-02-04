@@ -33,12 +33,12 @@ The file and variable name of where the version number is stored, for example::
 
     semantic_release/__init__.py:__version__
 
-You can specify multiple version variables (i.e. in different files) by 
+You can specify multiple version variables (i.e. in different files) by
 providing comma-separated list of such strings::
 
     semantic_release/__init__.py:__version__,docs/conf.py:version
 
-In ``pyproject.toml`` specifically, you can also use the TOML list syntax to 
+In ``pyproject.toml`` specifically, you can also use the TOML list syntax to
 specify multiple versions:
 
 .. code-block:: toml
@@ -67,14 +67,14 @@ identified using an arbitrary regular expression::
 
     README.rst:VERSION (\d+\.\d+\.\d+)
 
-The regular expression must contain a parenthesized group that matches the 
-version number itself.  Anything outside that group is just context.  For 
-example, the above specifies that there is a version number in ``README.rst`` 
+The regular expression must contain a parenthesized group that matches the
+version number itself.  Anything outside that group is just context.  For
+example, the above specifies that there is a version number in ``README.rst``
 preceded by the string "VERSION".
 
-If the pattern contains the string ``{version}``, it will be replaced with the 
-regular expression used internally by ``python-semantic-release`` to match 
-semantic version numbers.  So the above example would probably be better 
+If the pattern contains the string ``{version}``, it will be replaced with the
+regular expression used internally by ``python-semantic-release`` to match
+semantic version numbers.  So the above example would probably be better
 written as::
 
     README.rst:VERSION {version}
@@ -446,8 +446,8 @@ See :ref:`automatic-dist-upload` for more about uploads to custom repositories.
 
 ``upload_to_release``
 ---------------------
-If set to false, do not upload distributions to GitHub releases.
-If you are not using GitHub, this will be skipped regardless.
+If set to false, do not upload distributions to GitHub or Gitea releases.
+If you are not using GitHub or Gitea, this will be skipped regardless.
 
 .. _config-dist_path:
 
@@ -485,7 +485,7 @@ HVCS
 
 ``hvcs``
 --------
-The name of your hvcs. Currently only ``github`` and ``gitlab`` are supported.
+The name of your hvcs. Currently only ``github`` ``gitlab`` and ``gitea`` are supported.
 
 Default: `github`
 
@@ -500,6 +500,8 @@ The domain url (without https://) of your custom vcs server.
 ``hvcs_api_domain``
 -------------------
 The api url (without https://) of your custom vcs server.
+If you are using Gitea, this will be skipped regardless, as Giteas api always runs
+at ``https://{hvcs_domain}/api/v1``.
 
 
 .. _config-check_build_status:
