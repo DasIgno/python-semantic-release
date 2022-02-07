@@ -485,7 +485,7 @@ HVCS
 
 ``hvcs``
 --------
-The name of your hvcs. Currently only ``github`` ``gitlab`` and ``gitea`` are supported.
+The name of your hvcs. Currently only ``github``, ``gitlab`` and ``gitea`` are supported.
 
 Default: `github`
 
